@@ -15,16 +15,20 @@ class Parser:
         sidx=''
         q='q0'
         t=''
+		lbl=''
         for s in st:#para cada letra na string
             if q=='q0':
                 q='q1'
-                idx=s
-                n[idx]={}
+                lbl+=s
             elif q=='q1':
                 if s==':':
                     q='q2'
                 elif s=='>':
                     q='q3'
+				else:
+					lbl+=s
+					idx=lbl
+					n[idx]={}
             elif q=='q2':
                 q='q1'
                 sidx=s
@@ -47,6 +51,7 @@ class Parser:
             elif q=='q5':
                 sidx=s
                 q='q1'
+				lbl=''
         return q=='q6'
     
     def get_list(self):
